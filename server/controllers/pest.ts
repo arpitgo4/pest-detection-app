@@ -16,7 +16,7 @@ import { IPestDetectionModel } from 'Models';
 
 
 
-export const getPestDetections = (pest_name: string, detection_ratio: string) => {
+export const getPestDetections = (user_id: string, pest_name: string, detection_ratio: string) => {
     if (!detection_ratio)
         detection_ratio = '';
 
@@ -25,7 +25,8 @@ export const getPestDetections = (pest_name: string, detection_ratio: string) =>
 
     return PestDetection.find({
         pest_name,
-        detection_ratio: { $gte: lower_bound, $lte: upper_bound, }
+        detection_ratio: { $gte: lower_bound, $lte: upper_bound, },
+        'meta.created_by': user_id,
     })
     .then((pest_detections: Array<IPestDetectionModel>) => {
         if (!pest_detections)

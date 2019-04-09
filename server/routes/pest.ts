@@ -17,9 +17,10 @@ import { multerMiddleware, rateLimiterMiddleware, } from '../middlewares';
 
 
 router.get('/', (req: JWTRequest, res: Response, next: NextFunction) => {
+    const { _id: user_id, } = req.user;
     const { pest_name, detection_ratio, } = req.query;
 
-    return pestCtrl.getPestDetections(pest_name, detection_ratio)
+    return pestCtrl.getPestDetections(user_id, pest_name, detection_ratio)
     .then((pests: Array<IPestDetectionModel>) => {
         res.status(200).json({
             data: pests.map(p => {
