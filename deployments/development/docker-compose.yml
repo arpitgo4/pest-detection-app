@@ -11,6 +11,13 @@ services:
       - 27017:27017
     volumes:
       - ../../db/mongo_data:/data/db
+
+  redis:
+    container_name: pest-detection-redis
+    image: redis:5.0.3-alpine
+    restart: unless-stopped
+    ports: 
+      - 6379:6379
     
   client:
     container_name: pest-detection-client
@@ -42,11 +49,14 @@ services:
     depends_on:
       - mongo
       - api_gateway
+      - redis
     environment:
       - SERVER_PORT=8080
       - NODE_ENV=development
       - JWT_SECRET=U5ZnTwt0tpmUHAVhES51iXM52mFSbxsOojFs5JNnZUv082ZACjnsuRNklomA
       - JWT_HEADER=x-token
+      - REDIS_HOST=redis:6379
+      - POST_PEST_API_RATE_LIMIT=5          ## 5 requests per 10 second
       - MONGO_HOST=mongo:27017
       - MONGO_DATABASE=pest-detection-app
       - API_GATEWAY=localhost
