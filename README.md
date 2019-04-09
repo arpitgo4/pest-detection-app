@@ -35,6 +35,8 @@ MONGO_DB_NAME=pest-detection-app        # MongoDB database name
 JWT_SECRET=U5ZnTwt0tpmUHAVhES51iXM52mFSbxsOojFs5JNnZUv082ZACjnsuRNklomA
                                         # JWT Secret
 JWT_HEADER=x-token                      # JWT Header for REST APIs
+REDIS_HOST=redis:6379                   # Redis connection url
+POST_PEST_API_RATE_LIMIT=5              # Api Rate Limit config, 5 requests per 10 second
 
 ```
 
