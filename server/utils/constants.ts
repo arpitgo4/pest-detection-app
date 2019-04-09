@@ -12,6 +12,8 @@ const SERVER_DOMAIN = `http://${API_GATEWAY}`;
 
 const INSPECTION_DUMMY_IMAGE = `https://cdn.travel2next.com/wp-content/uploads/driving-across-canada-5.jpg`;
 
+const REDIS_RATE_LIMIT_HASH = `API_RATE_LIMIT`;
+
 
 export {
     UPLOAD_DESTINATION,
@@ -20,4 +22,5 @@ export {
     JWT_HEADER,
     USER_JWT_TOKEN_TTL,
     INSPECTION_DUMMY_IMAGE,
+    REDIS_RATE_LIMIT_HASH,
 };

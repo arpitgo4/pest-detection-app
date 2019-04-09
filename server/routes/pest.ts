@@ -13,7 +13,7 @@ import { Response, NextFunction, } from 'express';
 import { IPestDetectionModel, } from '../types/Models';
 import { JWTRequest, CustomError } from '../types/Interfaces.d';
 import { pestCtrl, } from '../controllers';
-import { multerMiddleware, } from '../middlewares';
+import { multerMiddleware, rateLimiterMiddleware, } from '../middlewares';
 
 
 router.get('/', (req: JWTRequest, res: Response, next: NextFunction) => {
@@ -34,7 +34,12 @@ router.get('/', (req: JWTRequest, res: Response, next: NextFunction) => {
     .catch((err: CustomError) => next(err));
 });
 
-router.post('/', multerMiddleware.any(), (req: JWTRequest, res: Response, next: NextFunction) => {
+
+const api_rate_limit = Number(process.env.POST_PEST_API_RATE_LIMIT);
+router.post('/', rateLimiterMiddleware(api_rate_limit),
+                multerMiddleware.any(),
+                (req: JWTRequest, res: Response, next: NextFunction) => {
+
     const { _id: user_id, } = req.user;
 
     if (!req.files)
