@@ -13,12 +13,8 @@ import {
 } from './middlewares';
 
 import {
-    // userRouter,
     authRouter,
     pestRouter,
-    // inspectionRouter,
-    // miscRouter,
-    // uploadRouter,
 } from './routes';
 
 const app = express();
@@ -41,15 +37,8 @@ app.use('/api/v1/auth', authRouter);
 app.use(jwtHandler);
 
 app.use('/api/v1/pest', pestRouter);
-// app.use('/api/v1/upload', uploadRouter);
 
 app.use(jwtRefresher);
-
-
-// routes
-// app.use('/api/v1/user', userRouter);
-// app.use('/api/v1/inspection', inspectionRouter);
-// app.use('/api/v1/misc', miscRouter);
 
 
 app.use('*', (req, res, next) => next(new Error('api not found')));
