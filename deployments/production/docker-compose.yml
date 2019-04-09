@@ -1,0 +1,52 @@
+
+
+version: "3"
+
+services:
+  mongo:
+    container_name: pest-detection-mongo
+    image: pest-detection-mongo
+    build: ../../db
+    restart: unless-stopped
+    ports: 
+      - 27017:27017
+    volumes:
+      - ../../db/mongo_data:/data/dir
+
+  client:
+    container_name: pest-detection-client
+    iamge: pest-detection-client
+    restart: unless-stopped
+    build: ../../client
+    expose: 
+      - 3000
+    depends_on:
+      - server
+      - api_gateway
+    environment:
+      - API_GATEWAY=localhost
+    
+  server: 
+    container_name: pest-detection-server
+    iamge: pest-detection-server
+    build: ../../server
+    restart: unless-stopped
+    expose:
+      - 8080
+    depends_on:
+      - mongo
+      - api_gateway
+    environment:
+      - SERVER_PORT=8080
+      - NODE_ENV=production
+      - MONGO_HOST=mysql:3306
+      - MONGO_DATABASE=pest-detection-app
+      - API_GATEWAY=api_gateway
+      
+  api_gateway:
+    container_name: pest-detection-api-gateway
+    iamge: pest-detectiona-api-gateway
+    build: ../../api-gateway
+    restart: unless-stopped
+    ports:
+      - 80:80
