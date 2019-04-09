@@ -6,12 +6,10 @@
  * response back.
  */
 
-import chalk from 'chalk';
 
 const router = require('express').Router();
 import { Response, NextFunction, } from 'express';
 
-import * as constants from '../utils/constants';
 import * as utils from '../utils/utils';
 
 import { IUserModel } from '../types/Models';
@@ -20,23 +18,44 @@ import { userCtrl } from '../controllers';
 
 
 router.post('/token', (req: JWTRequest, res: Response, next: NextFunction) => {
-    const { username, password } = req.body.data.attributes;
+    const { mobile, } = req.body.data.attributes;
 
-    return userCtrl.getUserByAuth(username, password)
-    .then((user: IUserModel) => utils.generateUserJWToken(user))
-    .then((jwToken: string) => {
+    return userCtrl.getUserByAuth(mobile)
+    .then((user: IUserModel) => Promise.all([ utils.generateUserJWToken(user), user, ]))
+    .then(([ jwToken, user ]: [ string, IUserModel ]) => {
         res.status(200).json({
+            data: {
+                type: 'user',
+                id: user._id,
+                attributes: user,
+            },
             meta: {
                 token: jwToken
             }
         });
     })
-    .catch((err: CustomError) => {
-        res.status(400).json({
-            errors: [{ message: err.message }]
+    .catch((err: CustomError) => next(err));
+});
+
+
+router.post('/user', (req: JWTRequest, res: Response, next: NextFunction) => {
+    const { name, dob, company, email, mobile, } = req.body.data.attributes;
+
+    return userCtrl.createUser(name, dob, company, email, mobile)
+    .then((user: IUserModel) => Promise.all([ utils.generateUserJWToken(user), user, ]))
+    .then(([ jwToken, user ]: [ string, IUserModel ]) => {
+        res.status(200).json({
+            data: {
+                type: 'user',
+                id: user._id,
+                attributes: user,
+            },
+            meta: {
+                token: jwToken
+            }
         });
-        next(err);
-    });
+    })
+    .catch((err: CustomError) => next(err));
 });
 
 

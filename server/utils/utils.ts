@@ -63,8 +63,6 @@ export const generateUserJWToken = (user: IUserModel, expireTime: string = USER_
     // sensitive fields removed from token data
     delete user.meta;
     delete user.__v;
-    delete user.password;
-    delete user.companies;
 
     return generateJWToken(user, expireTime);
 };
