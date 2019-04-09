@@ -19,7 +19,7 @@ Pest Detection app with api server in node.js, mongodb as db and web client in r
 ## API Sheet
 ```
 ## Postman api collection
-https://documenter.getpostman.com/view/401954/S17uunKr
+https://documenter.getpostman.com/view/401954/S1EL31YD
 
 ```
 
