@@ -6,15 +6,15 @@
  * the request goes here.
  */
 
-import chalk from 'chalk';
-
 import * as userCtrl from './user';
-import * as miscCtrl from './misc';
-import * as inspectionCtrl from './inspection';
+import * as pestCtrl from './pest';
+// import * as miscCtrl from './misc';
+// import * as inspectionCtrl from './inspection';
 
 
 export {
     userCtrl,
-    inspectionCtrl,
-    miscCtrl,
+    pestCtrl,
+    // inspectionCtrl,
+    // miscCtrl,
 };

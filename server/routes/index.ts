@@ -7,16 +7,19 @@
  */
 
 
-import userRouter from './user';
+// import userRouter from './user';
 import authRouter from './auth';
-import inspectionRouter from './inspection';
-import miscRouter from './misc';
-import uploadRouter from './upload';
+import pestRouter from './pest';
+// import inspectionRouter from './inspection';
+// import miscRouter from './misc';
+// import uploadRouter from './upload';
+
 
 export {
-    userRouter,
+    // userRouter,
     authRouter,
-    inspectionRouter,
-    miscRouter,
-    uploadRouter,
+    pestRouter,
+    // inspectionRouter,
+    // miscRouter,
+    // uploadRouter,
 };
