@@ -11,6 +11,7 @@ import {
     PestDetection
 } from '../models';
 
+import * as constants from '../utils/constants';
 import { IPestDetectionModel } from 'Models';
 
 
@@ -35,11 +36,11 @@ export const getPestDetections = (pest_name: string, detection_ratio: string) =>
 };
 
 
-export const createPestDetection = (user_id: string, pest_name: string, image_url: string) => {
+export const createPestDetection = (user_id: string, pest_name: string, image_path: string) => {
     return PestDetection.create({
         pest_name,
         detection_ratio: parseFloat(Math.random().toFixed(1)),
-        image_url,
+        image_url: `${constants.SERVER_DOMAIN}/${image_path}`,
         meta: {
             created_by: user_id,
         }

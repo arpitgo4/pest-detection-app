@@ -13,13 +13,13 @@ import { Response, NextFunction, } from 'express';
 import { IPestDetectionModel, } from '../types/Models';
 import { JWTRequest, CustomError } from '../types/Interfaces.d';
 import { pestCtrl, } from '../controllers';
-
+import { multerMiddleware, } from '../middlewares';
 
 
 router.get('/', (req: JWTRequest, res: Response, next: NextFunction) => {
     const { pest_name, detection_ratio, } = req.query;
 
-    return pestCtrl.getPestDetections(pest_name, detection_ratio,)
+    return pestCtrl.getPestDetections(pest_name, detection_ratio)
     .then((pests: Array<IPestDetectionModel>) => {
         res.status(200).json({
             data: pests.map(p => {
@@ -34,12 +34,17 @@ router.get('/', (req: JWTRequest, res: Response, next: NextFunction) => {
     .catch((err: CustomError) => next(err));
 });
 
-router.post('/', (req: JWTRequest, res: Response, next: NextFunction) => {
+router.post('/', multerMiddleware.any(), (req: JWTRequest, res: Response, next: NextFunction) => {
     const { _id: user_id, } = req.user;
-    const { pest_name, } = req.body.data.attributes;
 
-    const image_url = '';
-    return pestCtrl.createPestDetection(user_id, pest_name, image_url)
+    if (!req.files)
+        return next({ message: `No pest image found as form data!` });
+
+    // @ts-ignore
+    const pest_image = req.files.find(f => f.fieldname === 'pest_image');
+    const { pest_name, } = req.body;
+
+    return pestCtrl.createPestDetection(user_id, pest_name, pest_image.path)
     .then((pest: IPestDetectionModel) => {
         res.status(200).json({
             data: {

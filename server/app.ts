@@ -32,7 +32,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: '100mb', extended: false }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true, }));
 
 app.use('/static/uploads', express.static(path.resolve('static/uploads')));
 app.get('/api/v1/health', (_, res) => res.status(200).json({}));
