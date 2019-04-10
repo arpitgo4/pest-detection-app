@@ -1,5 +1,5 @@
 
-import jwtDecode from 'jwt-decode';
+import fetchProgress from 'fetch-progress';
 
 import { pestApiFactory } from '../config/api-factory';
 
@@ -45,6 +45,11 @@ export const createPestDetection = (pest_name, pest_image) => {
             method: api.type,
             body: formData,
         })
+        .then(fetchProgress({
+            onProgress(progress) {
+                console.log(progress);
+            }
+        }))
         .then(utils.errorHandler)
         .then(resJson => {
             const { data, } = resJson;

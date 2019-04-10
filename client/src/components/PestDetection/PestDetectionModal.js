@@ -29,18 +29,19 @@ export default class PestDetectionModal extends Component {
                 visible={modalVisible}>
 
                 <div className="row">
-                    <div className="col-md-12"> 
-                        <div style={{ width: 300 }}>                 
-                            {this._renderUploadButton()}
+                    <div className="col-md-12">
+                        <div style={{ width: 300 }} className="center-block"> 
+                            <div style={{ width: 110, margin: '0 auto' }}>                 
+                                {this._renderUploadButton()}
+                            </div>
+
+                            <Input 
+                                ref="pest_name"
+                                placeholder="Pest Name" 
+                                value={this.state.pest_name}
+                                onChange={(f_n => e => this._searchInputChange.bind(this)(e, f_n))('pest_name')} 
+                                style={{ width: 300, marginTop: 20 }} />
                         </div>
-
-                        <Input 
-                            ref="pest_name"
-                            placeholder="Pest Name" 
-                            value={this.state.pest_name}
-                            onChange={(f_n => e => this._searchInputChange.bind(this)(e, f_n))('pest_name')} 
-                            style={{ width: 300, marginTop: 20 }} />
-
                     </div>
                 </div>
 
