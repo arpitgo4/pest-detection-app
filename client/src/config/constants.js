@@ -6,13 +6,6 @@ export const DEFAULT_PAGE_SIZE = 10;
 export const LS_JWT_TOKEN_KEY = `token`;
 export const LS_USER_KEY = `user`;
 
-export const USER_ROLES = {
-    GUEST_USER: 'GUEST User',
-    CLIENT_USER: 'Client User',
-    SUPER_USER: 'Super User',
-    ADMIN_GUEST: 'GUEST Admin',
-    ADMIN: 'Admin',
-};
 
 const APP_BASE = `/dashboard`;
 export const ROUTES = {

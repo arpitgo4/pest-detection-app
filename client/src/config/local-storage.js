@@ -6,7 +6,7 @@ const getItem = key => {
     const item = localStorage.getItem(key);
     
     if (!item) return item;
-    else return JSON.parse(item);
+    else return key === 'token' ? item : JSON.parse(item);
 }; 
 
 const setItem = (key, obj) => localStorage.setItem(key, JSON.stringify(obj));
