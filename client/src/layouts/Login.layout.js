@@ -41,7 +41,7 @@ class LoginLayout extends Component {
                       <div className="form-group">
                         <div className="input-group">
                           <span className="input-group-addon">
-                            <i className="glyphicon glyphicon-user"></i>
+                            <i className="glyphicon glyphicon-earphone"></i>
                           </span> 
                           <input 
                             className="form-control" 

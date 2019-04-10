@@ -56,7 +56,7 @@ class RegisterLayout extends Component {
                       <div className="form-group">
                         <div className="input-group">
                           <span className="input-group-addon">
-                            <i className="glyphicon glyphicon-user"></i>
+                            <i className="glyphicon glyphicon-earphone"></i>
                           </span> 
                           <input className="form-control" 
                             ref="mobile" 
@@ -68,7 +68,7 @@ class RegisterLayout extends Component {
                       <div className="form-group">
                         <div className="input-group">
                           <span className="input-group-addon">
-                            <i className="glyphicon glyphicon-user"></i>
+                            <i className="glyphicon glyphicon-home"></i>
                           </span> 
                           <input className="form-control" 
                             ref="company" 
@@ -80,7 +80,7 @@ class RegisterLayout extends Component {
                       <div className="form-group">
                         <div className="input-group">
                           <span className="input-group-addon">
-                            <i className="glyphicon glyphicon-user"></i>
+                            <i className="glyphicon glyphicon-envelope"></i>
                           </span> 
                           <input className="form-control" 
                             ref="email" 
@@ -93,7 +93,7 @@ class RegisterLayout extends Component {
                       <div className="form-group">
                         <div className="input-group">
                           <span className="input-group-addon">
-                            <i className="glyphicon glyphicon-user"></i>
+                            <i className="glyphicon glyphicon-calendar"></i>
                           </span> 
                           <input className="form-control" 
                             ref="dob" 

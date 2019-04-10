@@ -22,7 +22,7 @@ class App extends Component {
 
     state = {
         filters: {
-            pest_name: 'Test Pest',
+            pest_name: '',
             detection_ratio: [0.0, 1.0],
         },
     };
