@@ -75,10 +75,11 @@ export const createUser = (mobile, email, name, company, dob,) => {
 };
 
 export const saveJWToken = (token) => {
+    console.log('>>>>>>', token);
     return {
         type: `SAVE_JWT_TOKEN`,
         payload: {
-            token: token
+            token
         }
     }
 };

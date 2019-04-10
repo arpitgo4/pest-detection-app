@@ -78,7 +78,7 @@ class LoginLayout extends Component {
       const { mobile, } = this.refs;
       
       fetchJWToken(mobile.value)
-      .then(() => browserHistory.push(ROUTES.APP_LAYOUT));
+      .then(() => browserHistory.push(ROUTES.PEST_DETECTION_GALLERY));
     }
 }
 

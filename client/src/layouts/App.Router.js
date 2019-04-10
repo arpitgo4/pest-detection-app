@@ -23,12 +23,11 @@ const AppRouter = () => (
 				<IndexRoute component={LoginLayout} />
 				<Router path={ROUTES.REGISTER_LAYOUT} component={RegisterLayout} />
 				
-				{ /* <Route path={ROUTES.APP_LAYOUT} component={App}>
-
-					<Route path={ROUTES.USER_MANAGEMENT_LAYOUT} getComponent={() => System.import('./User.layout').then(c => c.default) } />
-					<Route path={ROUTES.INSPECTION_LAYOUT} getComponent={() => System.import('./Inspection.layout').then(c => c.default) } />
-					<Route path={ROUTES.IMAGERY_LAYOUT} getComponent={() => System.import('./Imagery.layout').then(c => c.default)} />
-				</Route> */ }									
+				<Route path={ROUTES.APP_LAYOUT} component={App}>
+					<Route path={ROUTES.PEST_DETECTION_GALLERY} 
+							getComponent={() => System.import('./Gallery.layout').then(c => c.default) } />
+							
+				</Route>								
 				
 			</Route>
 		</Router>

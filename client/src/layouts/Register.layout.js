@@ -134,7 +134,7 @@ class RegisterLayout extends Component {
         return showErrorNotification(`Please fill all the details`);
 
       createUser(mobile.value, email.value, name.value, company.value, dob_timestamp)
-      .then(() => browserHistory.push(ROUTES.APP_LAYOUT));
+      .then(() => browserHistory.push(ROUTES.PEST_DETECTION_GALLERY));
     }
 }
 
