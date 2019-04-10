@@ -5,13 +5,11 @@ import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import CSSModules from 'react-css-modules';
 
-import HeaderUI from '../Header/Header';
 import styles from './App.style.css';
 
 import { deleteJWToken, deleteAllState, } from '../../action-creators/auth';
 
 import { removeTokenFromLS, removeUserFromLS } from '../../config/local-storage';
-import { USER_ROLES, ROUTES, } from '../../config/constants';
 
 import { Layout, Icon, Slider, Input, Button, } from 'antd';
 import Gallery from '../Gallery/Gallery';

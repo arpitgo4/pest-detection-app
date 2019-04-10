@@ -7,7 +7,6 @@ import configureStore from '../config/store.config';
 import { ROUTES } from '../config/constants';
 
 import AppLayout from './App.layout';
-import App from '../components/containers/App';
 
 import LoginLayout from './Login.layout';
 import RegisterLayout from './Register.layout';
@@ -21,13 +20,12 @@ const AppRouter = () => (
 			<Route path="/" component={AppLayout} >	
 
 				<IndexRoute component={LoginLayout} />
-				<Router path={ROUTES.REGISTER_LAYOUT} component={RegisterLayout} />
+				<Route path={ROUTES.REGISTER_LAYOUT} component={RegisterLayout} />
 				
-				<Route path={ROUTES.APP_LAYOUT} component={App}>
-					<Route path={ROUTES.PEST_DETECTION_GALLERY} 
-							getComponent={() => System.import('./Gallery.layout').then(c => c.default) } />
-							
-				</Route>								
+				<Route path={ROUTES.PEST_DETECTION_GALLERY} 
+					getComponent={() => System.import('../components/containers/App').then(c => c.default)}/>					
+				
+				<Redirect from="*" to="/" />
 				
 			</Route>
 		</Router>
