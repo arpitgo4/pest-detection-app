@@ -39,7 +39,7 @@ class App extends Component {
     }
 
     render() {
-        const { pest_detections, } = this.props;
+        const { pest_detections, createPestDetection, } = this.props;
 
         return (
             <Layout>
@@ -57,7 +57,9 @@ class App extends Component {
                         </span>
                     </div>
 
-                    <Gallery pest_detections={pest_detections} />
+                    <Gallery 
+                        createPestDetection={createPestDetection}
+                        pest_detections={pest_detections} />
                 </Content>
             </Layout>
         );

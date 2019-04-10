@@ -47,10 +47,14 @@ export default class Gallery extends Component {
         );
     }
     
-    onModalOk() {
+    onModalOk(pest_name, files) {
+        const { createPestDetection, } = this.props;
         this.setState({ modalVisible: false, });
 
-        // pestActionCreators();
+        const [ image_file, ] = files;
+        console.log(pest_name, image_file.originFileObj);
+
+        createPestDetection(pest_name, image_file.originFileObj);
     }
 
     _renderPestDetections(pest_detections) {
