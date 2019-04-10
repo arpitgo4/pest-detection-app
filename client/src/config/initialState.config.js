@@ -18,7 +18,6 @@ const initialState = {
 		}
 	},
 	pest_detections: [],
-	misc: {},
 	notifications: [],				// react-redux-notifications component
 };
 

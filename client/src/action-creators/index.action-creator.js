@@ -3,7 +3,6 @@ import { error, success } from 'react-notification-system-redux';
 
 import * as pestActionCreators from './pest';
 import * as authActionCreators from './auth';
-import * as miscActionCreators from './misc';
 
 
 export const showErrorNotification = message => {
@@ -21,5 +20,4 @@ export const showErrorNotification = message => {
 export {
     authActionCreators,
     pestActionCreators,
-    miscActionCreators,
 };

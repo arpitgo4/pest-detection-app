@@ -6,14 +6,12 @@ import initialState from '../config/initialState.config';
 
 import { authReducer } from './auth';
 import { pestReducer } from './pest';
-import { miscReducer } from './misc';
 
 
 
 const appReducer = combineReducers({
 	auth: authReducer,
 	pest_detections: pestReducer,
-	misc: miscReducer,
 	notifications,
 });
 

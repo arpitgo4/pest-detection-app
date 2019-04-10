@@ -107,7 +107,7 @@ class RegisterLayout extends Component {
                           className="btn btn-lg btn-primary btn-block">
                           { is_loading ? <i className="fa fa-spinner fa-pulse"></i> : null }
                           &nbsp;&nbsp;
-                          Sign in
+                          Sign Up
                         </button>
                       </div>
                     </div>
