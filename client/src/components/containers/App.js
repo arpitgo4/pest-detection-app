@@ -68,10 +68,11 @@ class App extends Component {
             <div>
 
                 <div style={{ margin: '10px 0' }}>
-                    <h3>Search:</h3>
+                    <h3>Filters:</h3>
                     <Input 
                         ref="pest_name"
                         placeholder="%Pest Name%" 
+                        value={this.state.filters.pest_name}
                         onChange={(f_n => e => this._searchInputChange.bind(this)(e, f_n))('pest_name')} 
                         style={{ margin: '10px 0' }} />
                 </div>
@@ -87,6 +88,7 @@ class App extends Component {
 
                 <div>
                     <Button
+                        style={{ margin: '10px 0' }} 
                         className="pull-right" 
                         type="primary" 
                         onClick={this._applyFilters.bind(this)}>
@@ -122,6 +124,10 @@ class App extends Component {
                 [field_name]: e.target.value },
             });
         }
+    }
+
+    componentDidMount() {
+        this._fetchPestDetections();
     }
 
     logoutHandler() {
