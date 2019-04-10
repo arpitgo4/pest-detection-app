@@ -24,7 +24,7 @@ export const getPestDetections = (user_id: string, pest_name: string, detection_
     const upper_bound = parseFloat(detection_ratio.split('-')[1]) || 1.0;
 
     return PestDetection.find({
-        pest_name,
+        pest_name: { $regex: pest_name },
         detection_ratio: { $gte: lower_bound, $lte: upper_bound, },
         'meta.created_by': user_id,
     })
