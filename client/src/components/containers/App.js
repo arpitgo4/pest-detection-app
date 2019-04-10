@@ -108,6 +108,7 @@ class App extends Component {
         const { getPestDetections, } = this.props;
         const { pest_name, detection_ratio, } = this.state.filters;
 
+        console.log(this.state.filters);
         getPestDetections(pest_name, detection_ratio[0], detection_ratio[1]);
     }
 

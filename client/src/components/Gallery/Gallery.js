@@ -1,32 +1,63 @@
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, } from 'redux';
+import { Button } from 'antd';
 
+import GalleryTile from '../Gallery/GalleryTile';
+import PestDetectionModal from '../PestDetection/PestDetectionModal';
 
-class Gallery extends Component {
+import { pestActionCreators, } from '../../action-creators/index.action-creator';
+
+export default class Gallery extends Component {
+
+    state={
+        modalVisible: false,
+    };
 
     render() {
+        const { pest_detections, } = this.props;
+
         return (
-            <div>Pest Detections</div>
+            <div style={{ display: 'block', width: 950, margin: '50px auto' }}>
+
+                <div className="row">
+                    <div className="col-md-12">
+                        <h3 style={{ display: 'inline-block' }}>Pest Detections</h3>
+                        <Button
+                            onClick={() => {
+                                this.setState({ ...this.state, modalVisible: true, })
+                            }} 
+                            className="pull-right" 
+                            type="primary">
+                            Create Pest Detection
+                        </Button>
+                    </div>
+                </div>
+
+                {
+                    pest_detections.length === 0 ?
+                        <p>No Pest Detections Found!</p> : this._renderPestDetections(pest_detections)
+                }
+
+                <PestDetectionModal
+                    modalVisible={this.state.modalVisible} 
+                    onClose={() => this.setState({ modalVisible: false })}
+                    onOk={this.onModalOk.bind(this)}
+                />
+            </div>
+        );
+    }
+    
+    onModalOk() {
+        this.setState({ modalVisible: false, });
+
+        // pestActionCreators();
+    }
+
+    _renderPestDetections(pest_detections) {
+        return (
+                pest_detections.map(p =>
+                        <GalleryTile key={p._id} pest_detection={p} />
+                )
         );
     }
 }
-
-const mapStateToProps = ({ pest_detections, }, ownProps) => {
-
-    return {
-        pest_detections,
-    };
-
-};
-
-const mapDispatchToProps = dispatch => {
-    
-    return bindActionCreators({
-        
-    }, dispatch);
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
