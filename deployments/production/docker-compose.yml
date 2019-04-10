@@ -5,47 +5,61 @@ version: "3"
 services:
   mongo:
     container_name: pest-detection-mongo
-    image: pest-detection-mongo
-    build: ../../db
+    image: mongo:latest
     restart: unless-stopped
     ports: 
       - 27017:27017
     volumes:
-      - ../../db/mongo_data:/data/dir
+      - ../../db/mongo_data:/data/db
 
+  redis:
+    container_name: pest-detection-redis
+    image: redis:5.0.3-alpine
+    restart: unless-stopped
+    ports: 
+      - 6379:6379
+    
   client:
     container_name: pest-detection-client
-    iamge: pest-detection-client
-    restart: unless-stopped
+    image: pest-detection-client
     build: ../../client
+    restart: unless-stopped
     expose: 
       - 3000
     depends_on:
       - server
       - api_gateway
     environment:
-      - API_GATEWAY=localhost
+      - NODE_ENV=production
+      - API_GATEWAY=13.232.2.209
     
   server: 
     container_name: pest-detection-server
-    iamge: pest-detection-server
+    image: pest-detection-server
     build: ../../server
     restart: unless-stopped
+    volumes:
+      - ../../pest-detection-uploads:/usr/src/app/static/uploads
     expose:
       - 8080
     depends_on:
       - mongo
       - api_gateway
+      - redis
     environment:
       - SERVER_PORT=8080
       - NODE_ENV=production
-      - MONGO_HOST=mysql:3306
+      - JWT_SECRET=U5ZnTwt0tpmUHAVhES51iXM52mFSbxsOojFs5JNnZUv082ZACjnsuRNklomA
+      - JWT_HEADER=x-token
+      - REDIS_HOST=redis:6379
+      - POST_PEST_API_RATE_LIMIT=5          ## 5 requests per 10 second
+      - MONGO_HOST=mongo:27017
       - MONGO_DATABASE=pest-detection-app
-      - API_GATEWAY=api_gateway
-      
+      - API_GATEWAY=localhost
+
   api_gateway:
     container_name: pest-detection-api-gateway
-    iamge: pest-detectiona-api-gateway
+    image: pest-detection-api-gateway
     build: ../../api-gateway
     restart: unless-stopped
     ports:
