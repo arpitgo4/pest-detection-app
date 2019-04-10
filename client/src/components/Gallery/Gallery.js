@@ -5,8 +5,6 @@ import { Button } from 'antd';
 import GalleryTile from '../Gallery/GalleryTile';
 import PestDetectionModal from '../PestDetection/PestDetectionModal';
 
-import { pestActionCreators, } from '../../action-creators/index.action-creator';
-
 export default class Gallery extends Component {
 
     state={
@@ -52,7 +50,6 @@ export default class Gallery extends Component {
         this.setState({ modalVisible: false, });
 
         const [ image_file, ] = files;
-        console.log(pest_name, image_file.originFileObj);
 
         createPestDetection(pest_name, image_file.originFileObj);
     }

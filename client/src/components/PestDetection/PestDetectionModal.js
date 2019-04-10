@@ -21,7 +21,10 @@ export default class PestDetectionModal extends Component {
                 width={1200}
                 closable={true}
                 destroyOnClose={true}
-                onOk={() => onOk(this.state['pest_name'], this.state.fileList)}
+                onOk={() => {
+                    onOk(this.state['pest_name'], this.state.fileList);
+                    this.setState({ pest_name: '', fileList: [] });
+                }}
                 onCancel={onClose}
                 visible={modalVisible}>
 

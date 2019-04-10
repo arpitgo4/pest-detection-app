@@ -37,14 +37,13 @@ export const createPestDetection = (pest_name, pest_image) => {
     return dispatch => {
         const api = pestApiFactory.get(pestApiFactory.API_TABLE.POST_PEST_DETECTION);
 
-        const formData = {
-            pest_name,
-            pest_image,
-        };
+        const formData = new FormData();
+        formData.append('pest_image', pest_image);
+        formData.append('pest_name', pest_name);
 
         return fetch(api.url, { 
             method: api.type,
-            formData,
+            body: formData,
         })
         .then(utils.errorHandler)
         .then(resJson => {
