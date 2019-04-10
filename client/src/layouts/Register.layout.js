@@ -5,7 +5,7 @@ import { browserHistory, Link, } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { authActionCreators, } from '../action-creators/index.action-creator';
+import { authActionCreators, showErrorNotification, } from '../action-creators/index.action-creator';
 import { ROUTES, } from '../config/constants';
 import { parseDateToTimeStamp, } from '../config/utils';
 
@@ -84,6 +84,7 @@ class RegisterLayout extends Component {
                           </span> 
                           <input className="form-control" 
                             ref="email" 
+                            required="true"
                             placeholder="Email Address" 
                             type="email"></input>
                         </div>
@@ -114,9 +115,7 @@ class RegisterLayout extends Component {
                 </fieldset>
               </div>
             </div>
-            <div style={styles['panel-footer']}>
-              Don't have an account! <Link to="/register"> Sign Up Here</Link>
-            </div>
+
               </div>
             </div>
           </div>
@@ -126,10 +125,14 @@ class RegisterLayout extends Component {
     }
 
     registerHandler() {
-      const { createUser, } = this.props;
+      const { createUser, showErrorNotification, } = this.props;
       const { name, email, dob, company, mobile, } = this.refs;
 
       const dob_timestamp = parseDateToTimeStamp(dob.value);
+      
+      if (!mobile.value || !email.value || !name.value || !company.value || !dob_timestamp)
+        return showErrorNotification(`Please fill all the details`);
+
       createUser(mobile.value, email.value, name.value, company.value, dob_timestamp)
       .then(() => browserHistory.push(ROUTES.APP_LAYOUT));
     }
@@ -168,6 +171,7 @@ const mapDispatchToProps = dispatch => {
 
   return bindActionCreators({
     createUser,
+    showErrorNotification,
   }, dispatch);
 };
 
