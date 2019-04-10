@@ -4,7 +4,7 @@ const API_SERVER_IP = API_GATEWAY;
 
 class ApiFactory {
 
-    get(api, params) {
+    get(api, params, query_params) {
         let url = api.url;
 
         if(params) {

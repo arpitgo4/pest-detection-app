@@ -9,6 +9,8 @@ export const LS_USER_KEY = `user`;
 
 const APP_BASE = `/dashboard`;
 export const ROUTES = {
+    LOGIN_LAYOUT: '/',
+    REGISTER_LAYOUT: '/register',
     APP_LAYOUT: APP_BASE,
     USER_MANAGEMENT_LAYOUT: `${APP_BASE}/user`,
     INSPECTION_LAYOUT: `${APP_BASE}/inspections`,

@@ -10,6 +10,7 @@ import AppLayout from './App.layout';
 import App from '../components/containers/App';
 
 import LoginLayout from './Login.layout';
+import RegisterLayout from './Register.layout';
 
 
 export const reduxStore = configureStore({ initialState });
@@ -20,6 +21,7 @@ const AppRouter = () => (
 			<Route path="/" component={AppLayout} >	
 
 				<IndexRoute component={LoginLayout} />
+				<Router path={ROUTES.REGISTER_LAYOUT} component={RegisterLayout} />
 				
 				{ /* <Route path={ROUTES.APP_LAYOUT} component={App}>
 

@@ -7,15 +7,14 @@ import { showErrorNotification } from './index.action-creator';
 import * as utils from '../config/utils';
 
 
-export const fetchJWToken = (username, password) => {
+export const fetchJWToken = (mobile) => {
     return dispatch => {
         const api = authApiFactory.get(authApiFactory.API_TABLE.GET_TOKEN);
 
         const body = JSON.stringify({
             data: {
                 attributes: {
-                    username,
-                    password
+                    mobile,
                 }
             }
         });

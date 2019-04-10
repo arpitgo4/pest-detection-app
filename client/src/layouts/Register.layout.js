@@ -1,13 +1,16 @@
 
+
 import React, { Component } from 'react';
 import { browserHistory, Link, } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { fetchJWToken } from '../action-creators/auth';
+import { authActionCreators, } from '../action-creators/index.action-creator';
 import { ROUTES, } from '../config/constants';
+import { parseDateToTimeStamp, } from '../config/utils';
 
-class LoginLayout extends Component {
+
+class RegisterLayout extends Component {
 
   render() {
     const { is_loading } = this.props;
@@ -25,7 +28,7 @@ class LoginLayout extends Component {
         <div className="col-sm-6 col-md-4 col-md-offset-4">
           <div className="panel panel-default">
             <div style={styles['panel-heading']}>
-              <strong> Sign in to continue</strong>
+              <strong> Sign up to continue</strong>
             </div>
             <div className="panel-body">
               <div>
@@ -43,14 +46,63 @@ class LoginLayout extends Component {
                           <span className="input-group-addon">
                             <i className="glyphicon glyphicon-user"></i>
                           </span> 
-                          <input 
-                            className="form-control" 
-                            ref="mobile" placeholder="Mobile Number" 
+                          <input className="form-control" 
+                            ref="name" 
+                            placeholder="Name" 
                             type="text"></input>
                         </div>
                       </div>
+
                       <div className="form-group">
-                        <button onClick={this.loginHandler.bind(this)}
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="glyphicon glyphicon-user"></i>
+                          </span> 
+                          <input className="form-control" 
+                            ref="mobile" 
+                            placeholder="Mobile Number" 
+                            type="text"></input>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="glyphicon glyphicon-user"></i>
+                          </span> 
+                          <input className="form-control" 
+                            ref="company" 
+                            placeholder="Company Name" 
+                            type="text"></input>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="glyphicon glyphicon-user"></i>
+                          </span> 
+                          <input className="form-control" 
+                            ref="email" 
+                            placeholder="Email Address" 
+                            type="email"></input>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <div className="input-group">
+                          <span className="input-group-addon">
+                            <i className="glyphicon glyphicon-user"></i>
+                          </span> 
+                          <input className="form-control" 
+                            ref="dob" 
+                            placeholder="Date of Birth" 
+                            type="date"></input>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <button onClick={this.registerHandler.bind(this)}
                           className="btn btn-lg btn-primary btn-block">
                           { is_loading ? <i className="fa fa-spinner fa-pulse"></i> : null }
                           &nbsp;&nbsp;
@@ -73,11 +125,12 @@ class LoginLayout extends Component {
       );
     }
 
-    loginHandler() {
-      const { fetchJWToken } = this.props;
-      const { mobile, } = this.refs;
-      
-      fetchJWToken(mobile.value)
+    registerHandler() {
+      const { createUser, } = this.props;
+      const { name, email, dob, company, mobile, } = this.refs;
+
+      const dob_timestamp = parseDateToTimeStamp(dob.value);
+      createUser(mobile.value, email.value, name.value, company.value, dob_timestamp)
       .then(() => browserHistory.push(ROUTES.APP_LAYOUT));
     }
 }
@@ -111,10 +164,12 @@ const mapStateToProps = ({ auth }) => {
 };
 
 const mapDispatchToProps = dispatch => {
+  const { createUser, } = authActionCreators;
+
   return bindActionCreators({
-    fetchJWToken
+    createUser,
   }, dispatch);
 };
 
       
-export default connect(mapStateToProps, mapDispatchToProps)(LoginLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterLayout);
