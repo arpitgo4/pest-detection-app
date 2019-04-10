@@ -55,7 +55,7 @@ services:
       - POST_PEST_API_RATE_LIMIT=5          ## 5 requests per 10 second
       - MONGO_HOST=mongo:27017
       - MONGO_DATABASE=pest-detection-app
-      - API_GATEWAY=localhost
+      - API_GATEWAY=13.232.2.209
 
   api_gateway:
     container_name: pest-detection-api-gateway
